@@ -58,13 +58,9 @@ if (! function_exists('mt_pruebas_html')) {
     function mt_pruebas_html()
     {
 ?>
-
-        <div class="wrap">
-            <form action="" method="post">
-                <input type="text" placeholder="Texto">
-                <?php submit_button('Enviar') ?>
-            </form>
-        </div>
+        <br>
+        <!-- Ejecuta el js de mt-admin -->
+        <button class="btn-ejecutar">Ejecutar</button>
 
     <?php
     }
@@ -102,7 +98,7 @@ function mt_cargando_librerias_admin($page)
     //var_dump($page);
     //si no es igual se termina de inmediato
     if ($page != 'toplevel_page_mt_pruebas') return;
-    wp_enqueue_style(
+    wp_register_style(
         'mt_admin_estilos',
         get_theme_file_uri('admin/css/mt-admin.css'),
         [],
@@ -110,13 +106,17 @@ function mt_cargando_librerias_admin($page)
         'all'
     );
 
-    wp_enqueue_script(
+    //para los scritps
+    wp_register_script(
         'mt_admin_script',
         get_theme_file_uri('admin/js/mt-admin.js'),
-        [],
+        ['jquery'],
         '1.0',
-        'all'
+        true
     );
+
+    wp_enqueue_script('mt_admin_script');
+    wp_enqueue_style('mt_admin_estilos');
 }
 
 add_action('admin_enqueue_scripts', 'mt_cargando_librerias_admin');

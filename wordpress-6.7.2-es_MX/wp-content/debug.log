@@ -738,3 +738,6 @@ Stack trace:
 [30-Apr-2025 15:37:24 UTC]   Automatic theme updates starting...
 [30-Apr-2025 15:37:24 UTC]   Automatic theme updates complete.
 [30-Apr-2025 15:37:24 UTC] Automatic updates complete.
+[30-Apr-2025 19:37:13 UTC] PHP Parse error:  syntax error, unexpected token "}" in C:\xampp\htdocs\temaswp\wordpress-6.7.2-es_MX\wp-content\themes\mitema\functions.php on line 119
+[30-Apr-2025 19:37:13 UTC] PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\temaswp\wordpress-6.7.2-es_MX\wp-includes\class-wp-recovery-mode-email-service.php on line 367
+[30-Apr-2025 19:37:13 UTC] PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\temaswp\wordpress-6.7.2-es_MX\wp-includes\class-wp-recovery-mode-email-service.php on line 368
