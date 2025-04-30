@@ -1,0 +1,1 @@
+embed-page-gallery.php
