@@ -5,3 +5,24 @@ body{
 *{
     font-size: 30px;
 }
+
+
+#form-practicas-alen {
+    font-size: 14px;
+    font-family: 'Roboto';
+}
+#form-practicas-alen input[type="radio"] { 
+    appearance: none;
+    width: 13px;
+    height: 13px;
+    border: 1px solid;
+    border-radius: 2px;
+    outline: none;
+}
+#form-practicas-alen input[type="radio"]:checked {
+    background-repeat: no-repeat;
+    background-position:center center;
+    background-size:13px 13px;
+    background-color: #0075FF;
+    border-color: #0075FF;
+}

@@ -8,7 +8,12 @@ $email = "Yucli_baza@outlook.com";
 
 echo "<h1>".sanitize_email($email)."</h1>";
 
-
+if (shortcode_exists('mt_primer_shortcode')) {
+    # code...
+    echo 'el shotcode existe';
+}else{
+    echo 'el shortcode no existe';
+}
 
 if (have_posts()) :
     while (have_posts()) :
@@ -16,7 +21,8 @@ if (have_posts()) :
         the_post();
 
         $titulo = get_the_title();
-        $contenido = get_the_content();
+        ///agregar el do_shortcode
+        $contenido = do_shortcode(get_the_content()) ;
         $url_post = get_the_permalink();
         $id = get_the_ID();
         $time = get_the_time();

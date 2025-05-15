@@ -97,6 +97,7 @@ function mt_cargando_librerias_admin($page)
     //muestra el slug de la page
     //var_dump($page);
     //si no es igual se termina de inmediato
+    //el register precarga lso estilos y con wp_enque se cargan
     if ($page != 'toplevel_page_mt_pruebas') return;
     wp_register_style(
         'mt_admin_estilos',
@@ -147,4 +148,88 @@ function mt_cargando_librerias_login()
 }
 
 add_action('login_enqueue_scripts', 'mt_cargando_librerias_login');
-?>
+
+
+function mt_quitar_estilos_script()
+{
+    wp_dequeue_style('mt_admin_estilos');
+    wp_dequeue_script('mt_admin_script');
+    //con estos ya no se puden usar a futuro
+
+    wp_deregister_style('mt_admin_estilos');
+    wp_enqueue_style('mt_admin_estilos');
+
+    /*     wp_deregister_script('jquery');
+ */
+}
+
+add_action('admin_enqueue_scripts', 'mt_quitar_estilos_script');
+
+
+///shortcode function
+function mi_primer_shortcode($atts, $contenido)
+{
+    return $contenido;
+}
+
+add_shortcode('mt_primer_shortcode', 'mi_primer_shortcode');
+
+//remove_shortcode('mt_primer_shortcode');
+
+///shortcode function
+function mt_span_red($atts, $contenido)
+{
+    return "<span style='color:red'>$contenido</span>";
+}
+
+add_shortcode('mt_span_red', 'mt_span_red');
+
+
+function mt_container($atts, $contenido)
+{
+    return "<div class='container'>" . do_shortcode($contenido)  . "</div>";
+}
+
+add_shortcode('mt_container', 'mt_container');
+
+//Muy util en caso de poner un estilo en la etiqueta en el page de wordpress se respetara el otro
+function mt_button_enlace($attr_new, $contenido)
+{
+    $attr_default = [
+        'texto' => '',
+        'size' => '16px',
+        'color' => 'white',
+        'bgcolor' => 'green',
+        'padding' => '5px 10px',
+        'url' => '#',
+        'target' => '_blank'
+    ];
+    //transformamos las letras en minusculas
+    $attr_new = array_change_key_case((array)$attr_new, CASE_LOWER);
+    //el attr_new remplazara los valores del default - con extr_prefix, nos permite poner el array y usarlos como varibles
+    extract(shortcode_atts($attr_default, $attr_new, 'mt_enlace'), EXTR_PREFIX_ALL, 'mt');
+    //Se le da el valor en la etiqueta en el page de wordpress
+    if ($mt_texto == '') return 'Por favor ingrese un texto para utilizar el shortcode';
+
+    $style = "
+    background-color: $mt_bgcolor; color: $mt_color;font_size: $mt_size;padding: $mt_padding;";
+
+    return "<a href='$mt_url' target ='$mt_target' style='$style'>$mt_texto</a>";
+}
+
+add_shortcode('mt_enlace', 'mt_button_enlace');
+
+
+/* function mt_filtrando_shortcode($out,$pairs,$atts,$shortcode){
+    echo "<pre>";
+    var_dump($out);
+        var_dump($pairs);
+    var_dump($atts);
+    var_dump($shortcode);
+
+        echo "<pre>";
+
+    return $out;
+}
+
+add_filter('shortcode_atts_mt_enlace','mt_filtrando_shortcode', 10 , 4); */
